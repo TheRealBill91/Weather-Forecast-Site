@@ -1,0 +1,40 @@
+{
+  "name": "weather-forecast-site",
+  "version": "1.0.0",
+  "description": "This is a simple site that uses weatherapi.com to display weather information for any location. You can search for a specific location and toggle displaying the data in Fahrenheit or Celsius. The site also changes the look of the page based on the data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "serve": "webpack serve",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheRealBill91/Weather-Forecast-Site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheRealBill91/Weather-Forecast-Site/issues"
+  },
+  "homepage": "https://github.com/TheRealBill91/Weather-Forecast-Site#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "file-loader": "^6.2.0",
+    "style-loader": "^3.3.2",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.78.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
