@@ -1,0 +1,53 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+input[type='search'] {
+    width: 100%;
+    border-radius: 12px;
+    background-color: rgb(231, 231, 231);
+    border: none;
+}
+
+header {
+    height: 10%;
+    background-color: lightgray;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+
+.logoAndTitle {
+    display: flex;
+    align-items: center;
+}
+
+.logoAndTitle p {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.logoAndTitle>img {
+    width: auto;
+    height: 100px;
+    mix-blend-mode: color-burn;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 70%;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20%;
+    margin-top: 16px;
+}
+
+.quickWeatherInfo {}
