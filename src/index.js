@@ -1,8 +1,20 @@
 import './css/normalize.css'
 import './css/style.css'
 
-import { fetchWeatherData } from './getWeatherInfo'
-import { displayQuickWeatherInfo } from './displayController'
+import {
+  fetchWeatherData,
+  handleFetchWeatherFromSearch,
+  processWeatherFromSearch
+} from './getWeatherInfo'
+import {
+  displayQuickWeatherInfoFahrenheit,
+  toggleQuickWeatherInfoCelsius,
+  toggleQuickWeatherInfoFahrenheit,
+  fetchWeatherFromSearchListen
+} from './displayController'
 
 /* fetchWeatherData() */
-displayQuickWeatherInfo()
+displayQuickWeatherInfoFahrenheit()
+toggleQuickWeatherInfoCelsius()
+toggleQuickWeatherInfoFahrenheit()
+fetchWeatherFromSearchListen()
