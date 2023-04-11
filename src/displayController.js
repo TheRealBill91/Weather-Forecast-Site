@@ -114,17 +114,34 @@ const toggleQuickWeatherInfoFahrenheit = () => {
   })
 }
 
-const handleSearchClick = async () => {
+/* Ensure user has entered a city before hitting search, otherwise show error 
+to user */
+const validateUserInput = (event, spanError) => {
+  let validInput = true
+  const inputElm = document.getElementById('locationSearch')
+  const inputValue = inputElm.value
+  if (inputValue.length === 0) {
+    spanError.textContent = 'Please enter a valid location'
+    event.preventDefault()
+    validInput = false
+  }
+  return validInput
+}
+
+const handleSearchClick = async (event) => {
   const quickWeatherInfoDivs = document.querySelectorAll(
     '.quickWeatherInfo > *'
   )
-  try {
-    const weatherData = await handleFetchWeatherFromSearch()
-    processWeatherFromSearch(weatherData)
+  const spanError = document.querySelector('.error')
+  const validInput = validateUserInput(event, spanError)
+  if (!validInput) {
+    return
+  }
+  spanError.textContent = ''
 
-    /*   const processedData =
-      processWeatherFromSearch().quickWeatherInfoFahrenheit(weatherData)
-    setProcessedData(processedData) */
+  try {
+    const weatherData = await handleFetchWeatherFromSearch(event)
+    processWeatherFromSearch(weatherData)
 
     const processedData = getProcessedData()
     const fahrenheitData = processedData[0]
@@ -134,7 +151,7 @@ const handleSearchClick = async () => {
     ]
     changeQuickWeatherInfoFahrenheit(weatherInfoObj, quickWeatherInfoDivs)
   } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error)
+    /* console.error('There has been a problem with your fetch operation:', error) */
   }
 }
 

@@ -14,6 +14,20 @@ body {
     gap: 4px;
 }
 
+.searchAndError {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+span.error {
+    /* outline: 1px solid black; */
+    width: 100%;
+    height: 22px;
+    margin-left: 4px;
+    color: #bf2020;
+}
+
 #searchBtn {
     display: flex;
     justify-content: center;
@@ -111,6 +125,11 @@ h3.feelsLikeHeader {
     margin: 5px 0px;
 }
 
+.topBar {
+    display: flex;
+    flex-direction: column;
+}
+
 .topBarControls {
     display: flex;
     align-items: center;
@@ -133,6 +152,7 @@ h3.feelsLikeHeader {
     background-color: rgb(182, 182, 182);
     font-size: 0.7rem;
     border-radius: 8px 8px;
+    color: black;
 }
 
 #fahrenheit-btn.active,

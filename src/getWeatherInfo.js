@@ -29,9 +29,11 @@ const fetchWeatherData = async () => {
   }
 }
 
-const handleFetchWeatherFromSearch = async () => {
+const handleFetchWeatherFromSearch = async (event) => {
   const inputElm = document.getElementById('locationSearch')
   const inputValue = inputElm.value
+  const spanError = document.querySelector('.error')
+  // reset input field after user hits search btn
   inputElm.value = ''
   try {
     const response = await fetch(
@@ -46,7 +48,8 @@ const handleFetchWeatherFromSearch = async () => {
     /* console.log(weatherData) */
     return weatherData
   } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error)
+    /*  console.error('There has been a problem with your fetch operation:', error) */
+    spanError.textContent = 'Oops, please enter a valid location'
   }
 }
 
@@ -112,29 +115,6 @@ const handleWeatherData = async () => {
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
-
-  /*   extracts quick glance weather info like temp, condition, feels like, etc. in Fahrenheit
-  const quickWeatherInfoCelsius = async () => {
-    try {
-      const weatherData = await fetchWeatherData()
-      console.log(weatherData)
-      const locationName = weatherData.location.name
-      const currentConditions = weatherData.current.condition.text
-      const currentTemp = weatherData.current.temp_c
-      const feelsLikeC = weatherData.current.feelslike_c
-      return { locationName, currentConditions, currentTemp, feelsLikeC }
-    } catch (error) {
-      console.error(
-        'There has been a problem with your fetch operation:',
-        error
-      )
-    }
-  }
-
-  return {
-    quickWeatherInfoFahrenheit,
-    quickWeatherInfoCelsius
-  } */
 }
 
 export {
