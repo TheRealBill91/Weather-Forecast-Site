@@ -59,15 +59,15 @@ const changeQuickWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
   for (let i = 0; i < weatherInfoKeys.length; i++) {
     const newWeatherInfo =
       weatherInfoKeys[i] === 'currentConditions'
-        ? (divs[i].childNodes[1].textContent = weatherInfoValues[i])
+        ? (divs[1].childNodes[1].textContent = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'locationName'
-        ? (divs[i].textContent = weatherInfoValues[i])
-        : weatherInfoKeys[i] === 'currentTemp'
-        ? (divs[i].textContent = `${weatherInfoValues[i]} °F `)
-        : weatherInfoKeys[i] === 'feelsLikeF'
-        ? (divs[i].textContent = `Feels like ${weatherInfoValues[i]} °F`)
+        ? (divs[0].textContent = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'conditionIcon'
-        ? (divs[i].childNodes[3].src = weatherInfoValues[i])
+        ? (divs[1].childNodes[3].src = weatherInfoValues[i])
+        : weatherInfoKeys[i] === 'currentTemp'
+        ? (divs[2].textContent = `${weatherInfoValues[i]} °F `)
+        : weatherInfoKeys[i] === 'feelsLikeF'
+        ? (divs[3].textContent = `Feels like ${weatherInfoValues[i]} °F`)
         : null
   }
 }
@@ -80,13 +80,15 @@ const changeQuickWeatherInfoCelsius = (weatherInfoObj, divs) => {
   for (let i = 0; i < weatherInfoKeys.length; i++) {
     const newWeatherInfo =
       weatherInfoKeys[i] === 'currentConditions'
-        ? (divs[i].textContent = weatherInfoValues[i])
+        ? (divs[1].childNodes[1].textContent = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'locationName'
-        ? (divs[i].textContent = weatherInfoValues[i])
+        ? (divs[0].textContent = weatherInfoValues[i])
+        : weatherInfoKeys[i] === 'conditionIcon'
+        ? (divs[1].childNodes[3].src = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'currentTemp'
-        ? (divs[i].textContent = `${weatherInfoValues[i]} °C `)
+        ? (divs[2].textContent = `${weatherInfoValues[i]} °C `)
         : weatherInfoKeys[i] === 'feelsLikeC'
-        ? (divs[i].textContent = `Feels like ${weatherInfoValues[i]} °C`)
+        ? (divs[3].textContent = `Feels like ${weatherInfoValues[i]} °C`)
         : null
   }
 }

@@ -63,7 +63,7 @@ const processWeatherFromSearch = (weatherData) => {
 const processInitialFahrenheit = (weatherData) => {
   const locationName = weatherData.location.name
   const currentConditions = weatherData.current.condition.text
-  const conditionIcon = weatherData.current.condition.icon
+  const conditionIcon = 'https:' + weatherData.current.condition.icon
   const currentTemp = Math.round(weatherData.current.temp_f)
   const feelsLikeF = Math.round(weatherData.current.feelslike_f)
   return {
@@ -79,7 +79,7 @@ const processInitialCelsius = (weatherData) => {
   console.log(weatherData)
   const locationName = weatherData.location.name
   const currentConditions = weatherData.current.condition.text
-  const conditionIcon = weatherData.current.condition.icon
+  const conditionIcon = 'https:' + weatherData.current.condition.icon
   const currentTemp = Math.round(weatherData.current.temp_c)
   const feelsLikeC = Math.round(weatherData.current.feelslike_c)
   return {
