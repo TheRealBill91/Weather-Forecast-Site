@@ -59,6 +59,9 @@ header {
     width: 100vw;
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0px 2px 4px 0px rgb(80 80 80 / 27%);
 }
 
 .logoAndTitle {
@@ -113,6 +116,11 @@ h3.cityHeader {
 h4.conditionsHeader {
     font-size: 2rem;
     margin: 5px 0px;
+}
+
+.conditions {
+    display: flex;
+    align-items: center;
 }
 
 h2.temperatureHeader {

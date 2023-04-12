@@ -5,7 +5,7 @@ import {
   fetchWeatherData,
   handleFetchWeatherFromSearch,
   processWeatherFromSearch
-} from './getWeatherInfo'
+} from './getCurrentWeatherInfo'
 import {
   displayQuickWeatherInfoFahrenheit,
   toggleQuickWeatherInfoCelsius,

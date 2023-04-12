@@ -4,7 +4,7 @@ import {
   processWeatherFromSearch,
   setProcessedData,
   getProcessedData
-} from './getWeatherInfo'
+} from './getCurrentWeatherInfo'
 
 // Displays quick glance weather info like city, condition, temp, and feels like
 // in fahrenheit (by default)
@@ -13,9 +13,6 @@ const displayQuickWeatherInfoFahrenheit = async () => {
     '.quickWeatherInfo > *'
   )
   try {
-    /* const weatherInfo = await handleWeatherData().quickWeatherInfoFahrenheit()
-    setProcessedData(weatherInfo) */
-
     /* If processed data does not exist (users reloads the page), fetch and process
     weather data from default location */
     let processedData = getProcessedData()
@@ -62,13 +59,15 @@ const changeQuickWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
   for (let i = 0; i < weatherInfoKeys.length; i++) {
     const newWeatherInfo =
       weatherInfoKeys[i] === 'currentConditions'
-        ? (divs[i].textContent = weatherInfoValues[i])
+        ? (divs[i].childNodes[1].textContent = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'locationName'
         ? (divs[i].textContent = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'currentTemp'
         ? (divs[i].textContent = `${weatherInfoValues[i]} °F `)
         : weatherInfoKeys[i] === 'feelsLikeF'
         ? (divs[i].textContent = `Feels like ${weatherInfoValues[i]} °F`)
+        : weatherInfoKeys[i] === 'conditionIcon'
+        ? (divs[i].childNodes[3].src = weatherInfoValues[i])
         : null
   }
 }

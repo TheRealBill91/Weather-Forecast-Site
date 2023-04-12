@@ -11,7 +11,7 @@ const setProcessedData = (fahrenheitData, celsiusData) => {
 }
 
 /* Fetches weather data from API and returns JSON */
-const fetchWeatherData = async () => {
+const fetchCurrentWeatherData = async () => {
   try {
     const response = await fetch(
       `https://api.weatherapi.com/v1/current.json?key=842b5da522834ef3bb4233651230704&q=Saint Louis&aqi=no
@@ -22,7 +22,7 @@ const fetchWeatherData = async () => {
       throw new Error('Failed Fetch')
     }
     const weatherData = await response.json()
-    /* console.log(weatherData) */
+    console.log(weatherData)
     return weatherData
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
@@ -53,26 +53,9 @@ const handleFetchWeatherFromSearch = async (event) => {
   }
 }
 
-const processFahrenheitFromSearch = (weatherData) => {
-  const locationName = weatherData.location.name
-  const currentConditions = weatherData.current.condition.text
-  const currentTemp = weatherData.current.temp_f
-  const feelsLikeF = weatherData.current.feelslike_f
-  return { locationName, currentConditions, currentTemp, feelsLikeF }
-}
-
-const processCelsiusFromSearch = (weatherData) => {
-  /* console.log(weatherData) */
-  const locationName = weatherData.location.name
-  const currentConditions = weatherData.current.condition.text
-  const currentTemp = weatherData.current.temp_c
-  const feelsLikeC = weatherData.current.feelslike_c
-  return { locationName, currentConditions, currentTemp, feelsLikeC }
-}
-
 const processWeatherFromSearch = (weatherData) => {
-  const fahrenheitData = processFahrenheitFromSearch(weatherData)
-  const celsiusData = processCelsiusFromSearch(weatherData)
+  const fahrenheitData = processInitialFahrenheit(weatherData)
+  const celsiusData = processInitialCelsius(weatherData)
   setProcessedData(fahrenheitData, celsiusData)
   console.log(processedWeatherData)
 }
@@ -80,34 +63,38 @@ const processWeatherFromSearch = (weatherData) => {
 const processInitialFahrenheit = (weatherData) => {
   const locationName = weatherData.location.name
   const currentConditions = weatherData.current.condition.text
-  const currentTemp = weatherData.current.temp_f
-  const feelsLikeF = weatherData.current.feelslike_f
-  return { locationName, currentConditions, currentTemp, feelsLikeF }
+  const conditionIcon = weatherData.current.condition.icon
+  const currentTemp = Math.round(weatherData.current.temp_f)
+  const feelsLikeF = Math.round(weatherData.current.feelslike_f)
+  return {
+    locationName,
+    currentConditions,
+    conditionIcon,
+    currentTemp,
+    feelsLikeF
+  }
 }
 
 const processInitialCelsius = (weatherData) => {
   console.log(weatherData)
   const locationName = weatherData.location.name
   const currentConditions = weatherData.current.condition.text
-  const currentTemp = weatherData.current.temp_c
-  const feelsLikeC = weatherData.current.feelslike_c
-  return { locationName, currentConditions, currentTemp, feelsLikeC }
-}
-
-const fetchRawWeatherData = async () => {
-  try {
-    const weatherData = await fetchWeatherData()
-    /* console.log(weatherData) */
-    return weatherData
-  } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error)
+  const conditionIcon = weatherData.current.condition.icon
+  const currentTemp = Math.round(weatherData.current.temp_c)
+  const feelsLikeC = Math.round(weatherData.current.feelslike_c)
+  return {
+    locationName,
+    currentConditions,
+    conditionIcon,
+    currentTemp,
+    feelsLikeC
   }
 }
 
 const handleWeatherData = async () => {
   /* extracts quick glance weather info like temp, condition, feels like, etc. in Fahrenheit */
   try {
-    const weatherData = await fetchRawWeatherData()
+    const weatherData = await fetchCurrentWeatherData()
     const fahrenheitData = processInitialFahrenheit(weatherData)
     const celsiusData = processInitialCelsius(weatherData)
     setProcessedData(fahrenheitData, celsiusData)
@@ -118,7 +105,7 @@ const handleWeatherData = async () => {
 }
 
 export {
-  fetchWeatherData,
+  fetchCurrentWeatherData,
   handleWeatherData,
   processWeatherFromSearch,
   handleFetchWeatherFromSearch,
