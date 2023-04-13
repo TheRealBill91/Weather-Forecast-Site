@@ -6,15 +6,18 @@ import {
   handleFetchWeatherFromSearch,
   processWeatherFromSearch
 } from './getCurrentWeatherInfo'
+
 import {
   displayQuickWeatherInfoFahrenheit,
   toggleQuickWeatherInfoCelsius,
   toggleQuickWeatherInfoFahrenheit,
-  fetchWeatherFromSearchListen
+  fetchWeatherFromSearchListen,
+  displayExtraFahrenheitData
 } from './displayController'
 
 /* fetchWeatherData() */
 displayQuickWeatherInfoFahrenheit()
+displayExtraFahrenheitData()
 toggleQuickWeatherInfoCelsius()
 toggleQuickWeatherInfoFahrenheit()
 fetchWeatherFromSearchListen()

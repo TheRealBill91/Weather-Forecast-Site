@@ -74,7 +74,7 @@ header {
   font-weight: 800;
 }
 
-.logoAndTitle>img {
+.logoAndTitle > img {
   width: 77px;
   height: auto;
 }
@@ -100,17 +100,18 @@ div#weatherContainer {
   justify-content: center;
   align-items: center;
   /* width: 82vw; */
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
 }
 
 #quickAndExtraContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, auto));
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
   /* grid-template-rows: 1fr 1fr; */
   /* grid-template-columns: 1fr 1fr; */
   width: 87vw;
-  /* gap: 12px; */
+  gap: 25px;
+  grid-template-rows: 338px;
 }
 
 .quickWeatherInfo {
@@ -144,8 +145,33 @@ div#weatherContainer {
   grid-column: 2/3; */
 }
 
-.extraWeatherInfo>* {
+.extraWeatherInfo > * {
   outline: 1px solid black;
+  height: 103px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.highLow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.sunriseSunset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.wind {
+  gap: 4px;
+}
+
+.highLow:first-child {
 }
 
 h3.cityHeader {
