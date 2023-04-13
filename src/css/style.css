@@ -133,7 +133,7 @@ div#weatherContainer {
 }
 
 .forecastContainer {
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
   width: 80vw;
   height: 300px;
 }

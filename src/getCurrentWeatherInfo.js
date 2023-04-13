@@ -7,9 +7,12 @@ const getProcessedData = () => {
 }
 
 const setProcessedData = (fahrenheitData, celsiusData) => {
-  processedWeatherData.fahrenheitInfo = fahrenheitData
-  processedWeatherData.celsiusInfo = celsiusData
-  return processedWeatherData
+  const dataSet = [fahrenheitData, celsiusData]
+  dataSet.forEach((data) => {
+    processedWeatherData.push(data)
+  })
+
+  // return processedWeatherData
 }
 
 /* Fetches weather data from API and returns JSON */
@@ -98,22 +101,15 @@ const fetchCurrentWeatherFromSearch = async (event) => {
 const handleWeatherData = async () => {
   /* extracts quick glance weather info like temp, condition, feels like, etc. in Fahrenheit */
   try {
-    const [currentWeatherData, forecastWeatherData, astronomyWeatherData] =
-      await Promise.all([
-        fetchCurrentWeatherData(),
-        fetchForecastData(),
-        fetchAstronomyData()
-      ])
-    /* const currentWeatherData = await fetchCurrentWeatherData()
-    const forecastWeatherData = await fetchForecastData()
-    const astronomyWeatherData = await fetchAstronomyData() */
+    const [forecastWeatherData, astronomyWeatherData] = await Promise.all([
+      fetchForecastData(),
+      fetchAstronomyData()
+    ])
     const fahrenheitData = processFahrenheitData(
-      currentWeatherData,
       forecastWeatherData,
       astronomyWeatherData
     )
     const celsiusData = processCelsiusData(
-      currentWeatherData,
       forecastWeatherData,
       astronomyWeatherData
     )
@@ -131,16 +127,11 @@ const processWeatherFromSearch = (weatherData) => {
   console.log(processedWeatherData)
 }
 
-const processFahrenheitData = (
-  currentWeatherData,
-  forecastWeatherData,
-  astronomyWeatherData
-) => {
+const processFahrenheitData = (forecastWeatherData, astronomyWeatherData) => {
   const currentQuickFahrenheitData =
-    handleCurrentQuickFahrenheitData(currentWeatherData)
+    handleCurrentQuickFahrenheitData(forecastWeatherData)
 
   const currentExtraFahrenheitData = handleCurrentExtraFahrenheitData(
-    currentWeatherData,
     forecastWeatherData,
     astronomyWeatherData
   )
@@ -151,19 +142,12 @@ const processFahrenheitData = (
   }
 }
 
-const processCelsiusData = (
-  currentWeatherData,
-  forecastWeatherData,
-  astronomyWeatherData
-) => {
+const processCelsiusData = (forecastWeatherData) => {
   const currentQuickCelsiusData =
-    handleCurrentQuickCelsiusData(currentWeatherData)
+    handleCurrentQuickCelsiusData(forecastWeatherData)
 
-  const currentExtraCelsiusData = handleCurrentExtraCelsiusData(
-    currentWeatherData,
-    forecastWeatherData,
-    astronomyWeatherData
-  )
+  const currentExtraCelsiusData =
+    handleCurrentExtraCelsiusData(forecastWeatherData)
 
   return {
     quickCelsius: currentQuickCelsiusData,
@@ -190,17 +174,16 @@ const handleCurrentQuickFahrenheitData = (weatherData) => {
 /* Processes the current weather fahrenheit data for the extra weather data,
 like humidity, UV Index, etc */
 const handleCurrentExtraFahrenheitData = (
-  currentWeatherData,
   forecastWeatherData,
   astronomyWeatherData
 ) => {
-  const humidity = currentWeatherData.current.humidity
-  const windMPH = Math.round(currentWeatherData.current.wind_mph)
-  const windDir = currentWeatherData.current.wind_dir
-  const aqi = currentWeatherData.current.air_quality['us-epa-index']
-  const visMiles = currentWeatherData.current.vis_miles
-  const uvIndex = currentWeatherData.current.uv
-  const cloudCoverPct = currentWeatherData.current.cloud
+  const humidity = forecastWeatherData.current.humidity
+  const windMPH = Math.round(forecastWeatherData.current.wind_mph)
+  const windDir = forecastWeatherData.current.wind_dir
+  const aqi = forecastWeatherData.current.air_quality['us-epa-index']
+  const visMiles = forecastWeatherData.current.vis_miles
+  const uvIndex = forecastWeatherData.current.uv
+  const cloudCoverPct = forecastWeatherData.current.cloud
   const tempHighF = Math.round(
     forecastWeatherData.forecast.forecastday[0].day.maxtemp_f
   )
@@ -229,13 +212,11 @@ const handleCurrentExtraFahrenheitData = (
 /* Processes the current weather fahrenheit data for the extra weather data,
 like humidity, UV Index, etc */
 const handleCurrentExtraCelsiusData = (
-  currentWeatherData,
-  forecastWeatherData,
-  astronomyWeatherData
+  forecastWeatherData
 ) => {
-  const windKPH = Math.round(currentWeatherData.current.wind_kph)
-  const aqi = currentWeatherData.current.air_quality['gb-defra-index']
-  const visKm = currentWeatherData.current.vis_km
+  const windKPH = Math.round(forecastWeatherData.current.wind_kph)
+  const aqi = forecastWeatherData.current.air_quality['gb-defra-index']
+  const visKm = forecastWeatherData.current.vis_km
   const tempHighC = Math.round(
     forecastWeatherData.forecast.forecastday[0].day.maxtemp_c
   )
@@ -247,7 +228,6 @@ const handleCurrentExtraCelsiusData = (
     windKPH,
     aqi,
     visKm,
-
     tempHighC,
     tempLowC
   }

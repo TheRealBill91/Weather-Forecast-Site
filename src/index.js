@@ -16,8 +16,9 @@ import {
 } from './displayController'
 
 /* fetchWeatherData() */
-displayQuickWeatherInfoFahrenheit()
-displayExtraFahrenheitData()
+
+await displayQuickWeatherInfoFahrenheit()
+await displayExtraFahrenheitData()
 toggleQuickWeatherInfoCelsius()
 toggleQuickWeatherInfoFahrenheit()
-fetchWeatherFromSearchListen()
+// fetchWeatherFromSearchListen()

@@ -21,7 +21,8 @@ const displayQuickWeatherInfoFahrenheit = async () => {
       await handleWeatherData()
       processedData = getProcessedData()
     }
-    const fahrenheitData = processedData.fahrenheitInfo.quickFahrenheit
+
+    const fahrenheitData = processedData[0].quickFahrenheit
     const weatherInfoObj = [
       { weatherInfoKeys: Object.keys(fahrenheitData) },
       { weatherInfoValues: Object.values(fahrenheitData) }
@@ -40,7 +41,7 @@ const displayQuickWeatherInfoCelsius = async () => {
   try {
     /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
     const processedData = getProcessedData()
-    const CelsiusData = processedData.celsiusInfo.quickCelsius
+    const CelsiusData = processedData[1].quickCelsius
     const weatherInfoObj = [
       { weatherInfoKeys: Object.keys(CelsiusData) },
       { weatherInfoValues: Object.values(CelsiusData) }
@@ -63,7 +64,7 @@ const displayExtraFahrenheitData = async () => {
       await handleWeatherData()
       processedData = getProcessedData()
     }
-    const fahrenheitData = processedData.fahrenheitInfo.extraFahrenheit
+    const fahrenheitData = processedData[0].extraFahrenheit
     const weatherInfoObj = [
       { weatherInfoKeys: Object.keys(fahrenheitData) },
       { weatherInfoValues: Object.values(fahrenheitData) }
@@ -121,7 +122,7 @@ const displayExtraCelsiusData = async () => {
       await handleWeatherData()
       processedData = getProcessedData()
     }
-    const celsiusData = processedData.celsiusInfo.extraCelsius
+    const celsiusData = processedData[1].extraCelsius
     const weatherInfoObj = [
       { weatherInfoKeys: Object.keys(celsiusData) },
       { weatherInfoValues: Object.values(celsiusData) }
