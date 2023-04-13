@@ -3,7 +3,8 @@ import {
   handleFetchWeatherFromSearch,
   processWeatherFromSearch,
   setProcessedData,
-  getProcessedData
+  getProcessedData,
+  fetchCurrentWeatherFromSearch
 } from './getCurrentWeatherInfo'
 
 // Displays quick glance weather info like city, condition, temp, and feels like
@@ -20,7 +21,7 @@ const displayQuickWeatherInfoFahrenheit = async () => {
       await handleWeatherData()
       processedData = getProcessedData()
     }
-    const fahrenheitData = processedData[0]
+    const fahrenheitData = processedData.fahrenheitInfo.quickFahrenheit
     const weatherInfoObj = [
       { weatherInfoKeys: Object.keys(fahrenheitData) },
       { weatherInfoValues: Object.values(fahrenheitData) }
@@ -39,7 +40,7 @@ const displayQuickWeatherInfoCelsius = async () => {
   try {
     /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
     const processedData = getProcessedData()
-    const CelsiusData = processedData[1]
+    const CelsiusData = processedData.celsiusInfo
     const weatherInfoObj = [
       { weatherInfoKeys: Object.keys(CelsiusData) },
       { weatherInfoValues: Object.values(CelsiusData) }
@@ -141,7 +142,7 @@ const handleSearchClick = async (event) => {
   spanError.textContent = ''
 
   try {
-    const weatherData = await handleFetchWeatherFromSearch(event)
+    const weatherData = await fetchCurrentWeatherFromSearch(event)
     processWeatherFromSearch(weatherData)
 
     const processedData = getProcessedData()
