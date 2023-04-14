@@ -74,7 +74,7 @@ header {
   font-weight: 800;
 }
 
-.logoAndTitle > img {
+.logoAndTitle>img {
   width: 77px;
   height: auto;
 }
@@ -100,7 +100,7 @@ div#weatherContainer {
   justify-content: center;
   align-items: center;
   /* width: 82vw; */
-  /* outline: 1px solid black; */
+  outline: 1px solid black;
 }
 
 #quickAndExtraContainer {
@@ -132,10 +132,22 @@ div#weatherContainer {
   /* padding: 20px; */
 }
 
-.forecastContainer {
-  /* outline: 1px solid black; */
-  width: 80vw;
+#forecastContainer {
+  outline: 1px solid black;
+  width: 87vw;
   height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+#forecastContainer>* {
+  outline: 1px solid green;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .extraWeatherInfo {
@@ -145,7 +157,7 @@ div#weatherContainer {
   grid-column: 2/3; */
 }
 
-.extraWeatherInfo > * {
+.extraWeatherInfo>* {
   outline: 1px solid black;
   height: 103px;
   display: flex;
@@ -153,11 +165,39 @@ div#weatherContainer {
   align-items: center;
 }
 
-div.highLow {
+div.chanceOfRain {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 12px;
+}
+
+div.sunrise,
+div.sunset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sunrise> :first-child,
+.sunset> :first-child {
+  margin-bottom: 0;
+}
+
+.sunset> :last-child,
+.sunrise> :last-child {
+  margin-top: 0;
+}
+
+.chanceOfRain> :first-child {
+  margin-bottom: 0;
+}
+
+.chanceOfRain> :last-child {
+  margin-top: 0;
 }
 
 div.sunriseSunset {
@@ -171,8 +211,7 @@ div.wind {
   gap: 4px;
 }
 
-.highLow:first-child {
-}
+.highLow:first-child {}
 
 h3.cityHeader {
   font-size: 2.5rem;

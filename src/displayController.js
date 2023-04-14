@@ -4,8 +4,14 @@ import {
   processWeatherFromSearch,
   setProcessedData,
   getProcessedData,
-  fetchCurrentWeatherFromSearch
-} from './getCurrentWeatherInfo'
+  handleDataFromSearch
+} from './processWeatherData.js'
+
+import {
+  fetchCurrentWeatherFromSearch,
+  fetchAstronomyDataFromSearch,
+  fetchForecastDataFromSearch
+} from './getWeatherData.js'
 
 // Displays quick glance weather info like city, condition, temp, and feels like
 // in fahrenheit (by default)
@@ -34,127 +40,6 @@ const displayQuickWeatherInfoFahrenheit = async () => {
   }
 }
 
-const displayQuickWeatherInfoCelsius = async () => {
-  const quickWeatherInfoDivs = document.querySelectorAll(
-    '.quickWeatherInfo > *'
-  )
-  try {
-    /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
-    const processedData = getProcessedData()
-    const CelsiusData = processedData[1].quickCelsius
-    const weatherInfoObj = [
-      { weatherInfoKeys: Object.keys(CelsiusData) },
-      { weatherInfoValues: Object.values(CelsiusData) }
-    ]
-    changeQuickWeatherInfoCelsius(weatherInfoObj, quickWeatherInfoDivs)
-    /*  console.log(weatherInfo) */
-  } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error)
-  }
-}
-
-const displayExtraFahrenheitData = async () => {
-  const quickWeatherInfoDivs = document.querySelectorAll(
-    '.extraWeatherInfo > *'
-  )
-  try {
-    /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
-    let processedData = getProcessedData()
-    if (processedData.length === 0) {
-      await handleWeatherData()
-      processedData = getProcessedData()
-    }
-    const fahrenheitData = processedData[0].extraFahrenheit
-    const weatherInfoObj = [
-      { weatherInfoKeys: Object.keys(fahrenheitData) },
-      { weatherInfoValues: Object.values(fahrenheitData) }
-    ]
-    changeExtraWeatherInfoFahrenheit(weatherInfoObj, quickWeatherInfoDivs)
-    /*  console.log(weatherInfo) */
-  } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error)
-  }
-}
-
-const changeExtraWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
-  const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
-  const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  /*  console.log(weatherInfoKeys)
-  console.log(weatherInfoValues) */
-  for (let i = 0; i < weatherInfoKeys.length; i++) {
-    const newWeatherInfo =
-      weatherInfoKeys[i] === 'humidity'
-        ? (divs[1].textContent = `${weatherInfoValues[i]} % `)
-        : weatherInfoKeys[i] === 'windMPH'
-        ? (divs[2].childNodes[1].textContent = `${weatherInfoValues[i]} MPH `)
-        : weatherInfoKeys[i] === 'windDir'
-        ? (divs[2].childNodes[3].textContent = `${weatherInfoValues[i]} `)
-        : weatherInfoKeys[i] === 'aqi'
-        ? (divs[6].textContent = `US Index: ${weatherInfoValues[i]} `)
-        : weatherInfoKeys[i] === 'visMiles'
-        ? (divs[5].textContent = `${weatherInfoValues[i]} mi `)
-        : weatherInfoKeys[i] === 'uvIndex'
-        ? (divs[4].textContent = `${weatherInfoValues[i]} UV `)
-        : weatherInfoKeys[i] === 'cloudCoverPct'
-        ? (divs[8].textContent = `${weatherInfoValues[i]} % `)
-        : weatherInfoKeys[i] === 'moonphase'
-        ? (divs[7].textContent = `${weatherInfoValues[i]}  `)
-        : weatherInfoKeys[i] === 'tempHighF'
-        ? (divs[0].childNodes[1].textContent = `High: ${weatherInfoValues[i]} °F`)
-        : weatherInfoKeys[i] === 'tempLowF'
-        ? (divs[0].childNodes[3].textContent = `Low: ${weatherInfoValues[i]} °F `)
-        : weatherInfoKeys[i] === 'sunrise'
-        ? (divs[3].childNodes[1].textContent = `Sunrise: ${weatherInfoValues[i]} `)
-        : weatherInfoKeys[i] === 'sunset'
-        ? (divs[3].childNodes[3].textContent = `Sunset: ${weatherInfoValues[i]} `)
-        : null
-  }
-}
-
-const displayExtraCelsiusData = async () => {
-  const quickWeatherInfoDivs = document.querySelectorAll(
-    '.extraWeatherInfo > *'
-  )
-  try {
-    /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
-    let processedData = getProcessedData()
-    if (processedData.length === 0) {
-      await handleWeatherData()
-      processedData = getProcessedData()
-    }
-    const celsiusData = processedData[1].extraCelsius
-    const weatherInfoObj = [
-      { weatherInfoKeys: Object.keys(celsiusData) },
-      { weatherInfoValues: Object.values(celsiusData) }
-    ]
-    changeExtraWeatherInfoCelsius(weatherInfoObj, quickWeatherInfoDivs)
-    /*  console.log(weatherInfo) */
-  } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error)
-  }
-}
-
-const changeExtraWeatherInfoCelsius = (weatherInfoObj, divs) => {
-  const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
-  const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  /*  console.log(weatherInfoKeys)
-  console.log(weatherInfoValues) */
-  for (let i = 0; i < weatherInfoKeys.length; i++) {
-    const newWeatherInfo =
-      weatherInfoKeys[i] === 'windKPH'
-        ? (divs[2].childNodes[1].textContent = `${weatherInfoValues[i]} KPH `)
-        : weatherInfoKeys[i] === 'aqi'
-        ? (divs[6].childNodes[0].textContent = `Defra Index: ${weatherInfoValues[i]} `)
-        : weatherInfoKeys[i] === 'visKm'
-        ? (divs[5].textContent = `${weatherInfoValues[i]} `)
-        : weatherInfoKeys[i] === 'tempHighC'
-        ? (divs[0].childNodes[1].textContent = `High: ${weatherInfoValues[i]} °C`)
-        : weatherInfoKeys[i] === 'tempLowC'
-        ? (divs[0].childNodes[3].textContent = `Low:${weatherInfoValues[i]} °C`)
-        : null
-  }
-}
-
 const changeQuickWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
   const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
@@ -176,6 +61,121 @@ const changeQuickWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
   }
 }
 
+const displayExtraFahrenheitData = async () => {
+  const extraWeatherInfoDivs = document.querySelectorAll(
+    '.extraWeatherInfo > *'
+  )
+  try {
+    /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
+    let processedData = getProcessedData()
+    if (processedData.length === 0) {
+      await handleWeatherData()
+      processedData = getProcessedData()
+    }
+    const fahrenheitData = processedData[0].extraFahrenheit
+    const weatherInfoObj = [
+      { weatherInfoKeys: Object.keys(fahrenheitData) },
+      { weatherInfoValues: Object.values(fahrenheitData) }
+    ]
+    changeExtraWeatherInfoFahrenheit(weatherInfoObj, extraWeatherInfoDivs)
+    /*  console.log(weatherInfo) */
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error)
+  }
+}
+
+const changeExtraWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
+  const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
+  const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
+  /*  console.log(weatherInfoKeys)
+  console.log(weatherInfoValues) */
+  for (let i = 0; i < weatherInfoKeys.length; i++) {
+    const newWeatherInfo =
+      weatherInfoKeys[i] === 'humidity'
+        ? (divs[1].childNodes[1].textContent = `${weatherInfoValues[i]} % `)
+        : weatherInfoKeys[i] === 'windMPH'
+        ? (divs[2].childNodes[1].textContent = `${weatherInfoValues[i]} MPH `)
+        : weatherInfoKeys[i] === 'windDir'
+        ? (divs[2].childNodes[3].textContent = `${weatherInfoValues[i]} `)
+        : weatherInfoKeys[i] === 'visMiles'
+        ? (divs[6].childNodes[1].textContent = `${weatherInfoValues[i]} mi `)
+        : weatherInfoKeys[i] === 'uvIndex'
+        ? (divs[5].childNodes[1].textContent = `${weatherInfoValues[i]} UV `)
+        : weatherInfoKeys[i] === 'cloudCoverPct'
+        ? (divs[8].childNodes[1].textContent = `${weatherInfoValues[i]} % `)
+        : weatherInfoKeys[i] === 'moonphase'
+        ? (divs[7].childNodes[1].textContent = `${weatherInfoValues[i]}  `)
+        : weatherInfoKeys[i] === 'chanceOfRain'
+        ? (divs[0].childNodes[3].textContent = `${weatherInfoValues[i]} %`)
+        : weatherInfoKeys[i] === 'sunrise'
+        ? (divs[3].childNodes[3].textContent = `Sunrise: ${weatherInfoValues[i]} `)
+        : weatherInfoKeys[i] === 'sunset'
+        ? (divs[4].childNodes[3].textContent = `Sunset: ${weatherInfoValues[i]} `)
+        : null
+  }
+}
+
+const displayForecastFahrenheit = async () => {
+  const quickWeatherInfoDivs = document.querySelectorAll(
+    '.forecastContainer > *'
+  )
+  try {
+    /* If processed data does not exist (users reloads the page), fetch and process
+    weather data from default location */
+    const processedData = getProcessedData()
+
+    const fahrenheitData = processedData[0].forecastFahrenheit
+    const weatherInfoObj = [
+      { weatherInfoKeys: Object.keys(fahrenheitData) },
+      { weatherInfoValues: Object.values(fahrenheitData) }
+    ]
+    changeForecastFahrenheitInfo(weatherInfoObj, quickWeatherInfoDivs)
+    /*  console.log(weatherInfo) */
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error)
+  }
+}
+
+const changeForecastFahrenheitInfo = (weatherInfoObj, divs) => {
+  const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
+  const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
+  /*  console.log(weatherInfoKeys)
+  console.log(weatherInfoValues) */
+  for (let i = 0; i < weatherInfoKeys.length; i++) {
+    const newWeatherInfo =
+      weatherInfoKeys[i] === 'currentConditions'
+        ? (divs[1].childNodes[1].textContent = weatherInfoValues[i])
+        : weatherInfoKeys[i] === 'locationName'
+        ? (divs[0].textContent = weatherInfoValues[i])
+        : weatherInfoKeys[i] === 'conditionIcon'
+        ? (divs[1].childNodes[3].src = weatherInfoValues[i])
+        : weatherInfoKeys[i] === 'currentTemp'
+        ? (divs[2].textContent = `${weatherInfoValues[i]} °F `)
+        : weatherInfoKeys[i] === 'feelsLikeF'
+        ? (divs[3].textContent = `Feels like ${weatherInfoValues[i]} °F`)
+        : null
+  }
+}
+
+const displayQuickWeatherInfoCelsius = async () => {
+  const quickWeatherInfoDivs = document.querySelectorAll(
+    '.quickWeatherInfo > *'
+  )
+  try {
+    /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
+    const processedData = getProcessedData()
+    const CelsiusData = processedData[1].quickCelsius
+    const weatherInfoObj = [
+      { weatherInfoKeys: Object.keys(CelsiusData) },
+      { weatherInfoValues: Object.values(CelsiusData) }
+    ]
+    changeQuickWeatherInfoCelsius(weatherInfoObj, quickWeatherInfoDivs)
+    /*  console.log(weatherInfo) */
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error)
+  }
+}
+
 const changeQuickWeatherInfoCelsius = (weatherInfoObj, divs) => {
   const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
@@ -193,6 +193,44 @@ const changeQuickWeatherInfoCelsius = (weatherInfoObj, divs) => {
         ? (divs[2].textContent = `${weatherInfoValues[i]} °C `)
         : weatherInfoKeys[i] === 'feelsLikeC'
         ? (divs[3].textContent = `Feels like ${weatherInfoValues[i]} °C`)
+        : null
+  }
+}
+
+const displayExtraCelsiusData = async () => {
+  const extraWeatherInfoDivs = document.querySelectorAll(
+    '.extraWeatherInfo > *'
+  )
+  try {
+    /*     const weatherInfo = await handleWeatherData().quickWeatherInfoCelsius() */
+    let processedData = getProcessedData()
+    if (processedData.length === 0) {
+      await handleWeatherData()
+      processedData = getProcessedData()
+    }
+    const celsiusData = processedData[1].extraCelsius
+    const weatherInfoObj = [
+      { weatherInfoKeys: Object.keys(celsiusData) },
+      { weatherInfoValues: Object.values(celsiusData) }
+    ]
+    changeExtraWeatherInfoCelsius(weatherInfoObj, extraWeatherInfoDivs)
+    /*  console.log(weatherInfo) */
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error)
+  }
+}
+
+const changeExtraWeatherInfoCelsius = (weatherInfoObj, divs) => {
+  const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
+  const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
+  /*  console.log(weatherInfoKeys)
+  console.log(weatherInfoValues) */
+  for (let i = 0; i < weatherInfoKeys.length; i++) {
+    const newWeatherInfo =
+      weatherInfoKeys[i] === 'windKPH'
+        ? (divs[2].childNodes[1].textContent = `${weatherInfoValues[i]} KPH `)
+        : weatherInfoKeys[i] === 'visKm'
+        ? (divs[6].childNodes[1].textContent = `${weatherInfoValues[i]} Km `)
         : null
   }
 }
@@ -239,6 +277,10 @@ const handleSearchClick = async (event) => {
   const quickWeatherInfoDivs = document.querySelectorAll(
     '.quickWeatherInfo > *'
   )
+
+  const extraWeatherInfoDivs = document.querySelectorAll(
+    '.extraWeatherInfo > *'
+  )
   const spanError = document.querySelector('.error')
   const validInput = validateUserInput(event, spanError)
   if (!validInput) {
@@ -247,16 +289,26 @@ const handleSearchClick = async (event) => {
   spanError.textContent = ''
 
   try {
-    const weatherData = await fetchCurrentWeatherFromSearch(event)
-    processWeatherFromSearch(weatherData)
-
+    const [forecastWeatherData, astronomyWeatherData] = await Promise.all([
+      fetchForecastDataFromSearch(),
+      fetchAstronomyDataFromSearch()
+    ])
+    handleDataFromSearch(forecastWeatherData, astronomyWeatherData)
     const processedData = getProcessedData()
-    const fahrenheitData = processedData[0]
-    const weatherInfoObj = [
-      { weatherInfoKeys: Object.keys(fahrenheitData) },
-      { weatherInfoValues: Object.values(fahrenheitData) }
+    const quickFahrenheitData = processedData[0].quickFahrenheit
+    const quickWeatherInfoObj = [
+      { weatherInfoKeys: Object.keys(quickFahrenheitData) },
+      { weatherInfoValues: Object.values(quickFahrenheitData) }
     ]
-    changeQuickWeatherInfoFahrenheit(weatherInfoObj, quickWeatherInfoDivs)
+
+    const extraFahrenheitData = processedData[0].extraFahrenheit
+    const extraWeatherInfoObj = [
+      { weatherInfoKeys: Object.keys(extraFahrenheitData) },
+      { weatherInfoValues: Object.values(extraFahrenheitData) }
+    ]
+
+    changeQuickWeatherInfoFahrenheit(quickWeatherInfoObj, quickWeatherInfoDivs)
+    changeExtraWeatherInfoFahrenheit(extraWeatherInfoObj, extraWeatherInfoDivs)
   } catch (error) {
     /* console.error('There has been a problem with your fetch operation:', error) */
   }
