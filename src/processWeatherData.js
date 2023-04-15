@@ -44,6 +44,7 @@ const handleWeatherData = async () => {
       astronomyWeatherData
     )
     setProcessedData(fahrenheitData, celsiusData)
+    console.log(Object.values(fahrenheitData.forecastFahrenheit))
     console.log(processedWeatherData)
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
@@ -66,6 +67,7 @@ const handleDataFromSearch = async (
     )
     clearProcessedData()
     setProcessedData(fahrenheitData, celsiusData)
+
     console.log(processedWeatherData)
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
@@ -88,38 +90,6 @@ const processFahrenheitData = (forecastWeatherData, astronomyWeatherData) => {
     quickFahrenheit: currentQuickFahrenheitData,
     extraFahrenheit: currentExtraFahrenheitData,
     forecastFahrenheit: forecastFahrenheitData
-  }
-}
-
-const processCelsiusData = (forecastWeatherData) => {
-  const currentQuickCelsiusData =
-    handleCurrentQuickCelsiusData(forecastWeatherData)
-
-  const currentExtraCelsiusData =
-    handleCurrentExtraCelsiusData(forecastWeatherData)
-
-  const forecastCelsiusData = handleForecastCelsiusData(forecastWeatherData)
-
-  return {
-    quickCelsius: currentQuickCelsiusData,
-    extraCelsius: currentExtraCelsiusData,
-    forecastCelsius: forecastCelsiusData
-  }
-}
-
-const handleCurrentQuickCelsiusData = (weatherData) => {
-  console.log(weatherData)
-  const locationName = weatherData.location.name
-  const currentConditions = weatherData.current.condition.text
-  const conditionIcon = 'https:' + weatherData.current.condition.icon
-  const currentTemp = Math.round(weatherData.current.temp_c)
-  const feelsLikeC = Math.round(weatherData.current.feelslike_c)
-  return {
-    locationName,
-    currentConditions,
-    conditionIcon,
-    currentTemp,
-    feelsLikeC
   }
 }
 
@@ -171,100 +141,36 @@ const handleCurrentExtraFahrenheitData = (
   }
 }
 
-const handleForecastCelsiusData = (forecastWeatherData) => {
-  const dayOneData = getCelsiusForecastDayOne()
-  const dayTwoData = getCelsiusForecastDayTwo()
-  const dayThreeData = getCelsiusForecastDayThree()
-  const dayFourData = getCelsiusForecastDayFour()
-  return { dayOneData, dayTwoData, dayThreeData, dayFourData }
+const processCelsiusData = (forecastWeatherData) => {
+  const currentQuickCelsiusData =
+    handleCurrentQuickCelsiusData(forecastWeatherData)
+
+  const currentExtraCelsiusData =
+    handleCurrentExtraCelsiusData(forecastWeatherData)
+
+  const forecastCelsiusData = handleForecastCelsiusData(forecastWeatherData)
+
+  return {
+    quickCelsius: currentQuickCelsiusData,
+    extraCelsius: currentExtraCelsiusData,
+    forecastCelsius: forecastCelsiusData
+  }
 }
 
-/* Retrieve forecast fahrenheit data for day one */
-const getCelsiusForecastDayOne = (forecastWeatherData) => {
-  const dayOneData = forecastWeatherData.forecast.forecastday[0].day
-  const conditionIcon = 'https:' + dayOneData.condition.icon
-  const tempHighF = dayOneData.maxtemp_c
-  const tempLowF = dayOneData.mintemp_c
-  const chanceOfRain = dayOneData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
-}
-
-/* Retrieve forecast fahrenheit data for day two */
-const getCelsiusForecastDayTwo = (forecastWeatherData) => {
-  const dayTwoData = forecastWeatherData.forecast.forecastday[1].day
-  const conditionIcon = 'https:' + dayTwoData.condition.icon
-  const tempHighF = dayTwoData.maxtemp_c
-  const tempLowF = dayTwoData.mintemp_c
-  const chanceOfRain = dayTwoData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
-}
-
-/* Retrieve forecast fahrenheit data for day three */
-const getCelsiusForecastDayThree = (forecastWeatherData) => {
-  const dayThreeData = forecastWeatherData.forecast.forecastday[1].day
-  const conditionIcon = 'https:' + dayThreeData.condition.icon
-  const tempHighF = dayThreeData.maxtemp_c
-  const tempLowF = dayThreeData.mintemp_c
-  const chanceOfRain = dayThreeData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
-}
-
-/* Retrieve forecast fahrenheit data for day four */
-const getCelsiusForecastDayFour = (forecastWeatherData) => {
-  const dayFourData = forecastWeatherData.forecast.forecastday[1].day
-  const conditionIcon = 'https:' + dayFourData.condition.icon
-  const tempHighF = dayFourData.maxtemp_c
-  const tempLowF = dayFourData.mintemp_c
-  const chanceOfRain = dayFourData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
-}
-
-const handleForecastFahrenheitData = (forecastWeatherData) => {
-  const dayOneData = getFahrenheitForecastDayOne()
-  const dayTwoData = getFahrenheitForecastDayTwo()
-  const dayThreeData = getFahrenheitForecastDayThree()
-  const dayFourData = getFahrenheitForecastDayFour()
-  return { dayOneData, dayTwoData, dayThreeData, dayFourData }
-}
-
-/* Retrieve forecast fahrenheit data for day one */
-const getFahrenheitForecastDayOne = (forecastWeatherData) => {
-  const dayOneData = forecastWeatherData.forecast.forecastday[0].day
-  const conditionIcon = 'https:' + dayOneData.condition.icon
-  const tempHighF = dayOneData.maxtemp_f
-  const tempLowF = dayOneData.mintemp_f
-  const chanceOfRain = dayOneData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
-}
-
-/* Retrieve forecast fahrenheit data for day two */
-const getFahrenheitForecastDayTwo = (forecastWeatherData) => {
-  const dayTwoData = forecastWeatherData.forecast.forecastday[1].day
-  const conditionIcon = 'https:' + dayTwoData.condition.icon
-  const tempHighF = dayTwoData.maxtemp_f
-  const tempLowF = dayTwoData.mintemp_f
-  const chanceOfRain = dayTwoData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
-}
-
-/* Retrieve forecast fahrenheit data for day three */
-const getFahrenheitForecastDayThree = (forecastWeatherData) => {
-  const dayThreeData = forecastWeatherData.forecast.forecastday[1].day
-  const conditionIcon = 'https:' + dayThreeData.condition.icon
-  const tempHighF = dayThreeData.maxtemp_f
-  const tempLowF = dayThreeData.mintemp_f
-  const chanceOfRain = dayThreeData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
-}
-
-/* Retrieve forecast fahrenheit data for day four */
-const getFahrenheitForecastDayFour = (forecastWeatherData) => {
-  const dayFourData = forecastWeatherData.forecast.forecastday[1].day
-  const conditionIcon = 'https:' + dayFourData.condition.icon
-  const tempHighF = dayFourData.maxtemp_f
-  const tempLowF = dayFourData.mintemp_f
-  const chanceOfRain = dayFourData.daily_chance_of_rain
-  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+const handleCurrentQuickCelsiusData = (weatherData) => {
+  console.log(weatherData)
+  const locationName = weatherData.location.name
+  const currentConditions = weatherData.current.condition.text
+  const conditionIcon = 'https:' + weatherData.current.condition.icon
+  const currentTemp = Math.round(weatherData.current.temp_c)
+  const feelsLikeC = Math.round(weatherData.current.feelslike_c)
+  return {
+    locationName,
+    currentConditions,
+    conditionIcon,
+    currentTemp,
+    feelsLikeC
+  }
 }
 
 const handleCurrentExtraCelsiusData = (forecastWeatherData) => {
@@ -275,6 +181,102 @@ const handleCurrentExtraCelsiusData = (forecastWeatherData) => {
     windKPH,
     visKm
   }
+}
+
+const handleForecastCelsiusData = (forecastWeatherData) => {
+  const dayOneData = getCelsiusForecastDayOne(forecastWeatherData)
+  const dayTwoData = getCelsiusForecastDayTwo(forecastWeatherData)
+  const dayThreeData = getCelsiusForecastDayThree(forecastWeatherData)
+  const dayFourData = getCelsiusForecastDayFour(forecastWeatherData)
+  return { dayOneData, dayTwoData, dayThreeData, dayFourData }
+}
+
+/* Retrieve forecast fahrenheit data for day one */
+const getCelsiusForecastDayOne = (forecastWeatherData) => {
+  const dayOneData = forecastWeatherData.forecast.forecastday[0].day
+  const conditionIcon = 'https:' + dayOneData.condition.icon
+  const tempHighF = Math.round(dayOneData.maxtemp_c)
+  const tempLowF = Math.round(dayOneData.mintemp_c)
+  const chanceOfRain = dayOneData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+}
+
+/* Retrieve forecast fahrenheit data for day two */
+const getCelsiusForecastDayTwo = (forecastWeatherData) => {
+  const dayTwoData = forecastWeatherData.forecast.forecastday[1].day
+  const conditionIcon = 'https:' + dayTwoData.condition.icon
+  const tempHighF = Math.round(dayTwoData.maxtemp_c)
+  const tempLowF = Math.round(dayTwoData.mintemp_c)
+  const chanceOfRain = dayTwoData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+}
+
+/* Retrieve forecast fahrenheit data for day three */
+const getCelsiusForecastDayThree = (forecastWeatherData) => {
+  const dayThreeData = forecastWeatherData.forecast.forecastday[1].day
+  const conditionIcon = 'https:' + dayThreeData.condition.icon
+  const tempHighF = Math.round(dayThreeData.maxtemp_c)
+  const tempLowF = Math.round(dayThreeData.mintemp_c)
+  const chanceOfRain = dayThreeData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+}
+
+/* Retrieve forecast fahrenheit data for day four */
+const getCelsiusForecastDayFour = (forecastWeatherData) => {
+  const dayFourData = forecastWeatherData.forecast.forecastday[1].day
+  const conditionIcon = 'https:' + dayFourData.condition.icon
+  const tempHighF = Math.round(dayFourData.maxtemp_c)
+  const tempLowF = Math.round(dayFourData.mintemp_c)
+  const chanceOfRain = dayFourData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+}
+
+const handleForecastFahrenheitData = (forecastWeatherData) => {
+  const dayOneData = getFahrenheitForecastDayOne(forecastWeatherData)
+  const dayTwoData = getFahrenheitForecastDayTwo(forecastWeatherData)
+  const dayThreeData = getFahrenheitForecastDayThree(forecastWeatherData)
+  const dayFourData = getFahrenheitForecastDayFour(forecastWeatherData)
+  return { dayOneData, dayTwoData, dayThreeData, dayFourData }
+}
+
+/* Retrieve forecast fahrenheit data for day one */
+const getFahrenheitForecastDayOne = (forecastWeatherData) => {
+  const dayOneData = forecastWeatherData.forecast.forecastday[0].day
+  const conditionIcon = 'https:' + dayOneData.condition.icon
+  const tempHighF = Math.round(dayOneData.maxtemp_f)
+  const tempLowF = Math.round(dayOneData.mintemp_f)
+  const chanceOfRain = dayOneData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+}
+
+/* Retrieve forecast fahrenheit data for day two */
+const getFahrenheitForecastDayTwo = (forecastWeatherData) => {
+  const dayTwoData = forecastWeatherData.forecast.forecastday[1].day
+  const conditionIcon = 'https:' + dayTwoData.condition.icon
+  const tempHighF = Math.round(dayTwoData.maxtemp_f)
+  const tempLowF = Math.round(dayTwoData.mintemp_f)
+  const chanceOfRain = dayTwoData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+}
+
+/* Retrieve forecast fahrenheit data for day three */
+const getFahrenheitForecastDayThree = (forecastWeatherData) => {
+  const dayThreeData = forecastWeatherData.forecast.forecastday[2].day
+  const conditionIcon = 'https:' + dayThreeData.condition.icon
+  const tempHighF = Math.round(dayThreeData.maxtemp_f)
+  const tempLowF = Math.round(dayThreeData.mintemp_f)
+  const chanceOfRain = dayThreeData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
+}
+
+/* Retrieve forecast fahrenheit data for day four */
+const getFahrenheitForecastDayFour = (forecastWeatherData) => {
+  const dayFourData = forecastWeatherData.forecast.forecastday[3].day
+  const conditionIcon = 'https:' + dayFourData.condition.icon
+  const tempHighF = Math.round(dayFourData.maxtemp_f)
+  const tempLowF = Math.round(dayFourData.mintemp_f)
+  const chanceOfRain = dayFourData.daily_chance_of_rain
+  return { conditionIcon, tempHighF, tempLowF, chanceOfRain }
 }
 
 export {

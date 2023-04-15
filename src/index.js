@@ -3,14 +3,16 @@ import './css/style.css'
 
 import {
   displayQuickWeatherInfoFahrenheit,
-  toggleQuickWeatherInfoCelsius,
-  toggleQuickWeatherInfoFahrenheit,
+  toggleFahrenheitWeatherInfo,
+  toggleCelsiusWeatherInfo,
   fetchWeatherFromSearchListen,
-  displayExtraFahrenheitData
+  displayExtraFahrenheitData,
+  displayForecastFahrenheit
 } from './displayController'
 
 await displayQuickWeatherInfoFahrenheit()
 await displayExtraFahrenheitData()
-toggleQuickWeatherInfoCelsius()
-toggleQuickWeatherInfoFahrenheit()
+await displayForecastFahrenheit()
+toggleCelsiusWeatherInfo()
+toggleFahrenheitWeatherInfo()
 fetchWeatherFromSearchListen()
