@@ -83,7 +83,7 @@ header {
 }
 
 .logoAndTitle p {
-  font-size: 2.3rem;
+  font-size: 2.5rem;
   font-weight: 800;
 }
 
@@ -306,13 +306,16 @@ div.wind {
 .windInfo {
   display: flex;
   gap: 4px;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
 }
 
 .highLow:first-child {
 }
 
 h3.cityHeader {
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   margin: 5px 0px;
 }
 
@@ -336,7 +339,7 @@ h4.conditionsHeader {
 }
 
 h2.temperatureHeader {
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   margin: 5px 0px;
 }
 
@@ -483,7 +486,7 @@ h3.feelsLikeHeader {
     display: flex;
     align-items: center;
     /* justify-content: space-evenly; */
-    gap: 17px;
+    gap: 20px;
     height: auto;
     /* flex-wrap: wrap; */
     /* width: 95%; */
