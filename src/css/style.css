@@ -87,7 +87,7 @@ header {
   font-weight: 800;
 }
 
-.logoAndTitle > img {
+.logoAndTitle>img {
   width: 110px;
   height: auto;
 }
@@ -156,7 +156,7 @@ div#weatherContainer {
   grid-template-columns: repeat(auto-fit, minmax(267px, auto));
 }
 
-#forecastContainer > * {
+#forecastContainer>* {
   /* outline: 1px solid green; */
   flex: 1;
   height: 100%;
@@ -182,7 +182,7 @@ div#weatherContainer {
   gap: 12px;
 }
 
-#forecastContainer > div > .high svg {
+#forecastContainer>div>.high svg {
   height: 45px;
 }
 
@@ -197,7 +197,7 @@ div#weatherContainer {
   gap: 12px;
 }
 
-#forecastContainer > div > svg {
+#forecastContainer>div>svg {
   height: 45px;
 }
 
@@ -212,7 +212,7 @@ div#weatherContainer {
   gap: 12px;
 }
 
-#forecastContainer > div > div > svg {
+#forecastContainer>div>div>svg {
   height: 45px;
 }
 
@@ -232,16 +232,16 @@ div#weatherContainer {
   box-shadow: 0px 2px 4px 0px #70707061;
 }
 
-.extraWeatherInfo > div > svg {
+.extraWeatherInfo>div>svg {
   height: 40px;
 }
 
-.extraWeatherInfo > div > p {
+.extraWeatherInfo>div>p {
   margin: 0;
   text-align: center;
 }
 
-.extraWeatherInfo > * {
+.extraWeatherInfo>* {
   /*  outline: 1px solid black; */
   display: flex;
   flex-direction: column;
@@ -270,21 +270,21 @@ div.sunset {
   gap: 12px;
 }
 
-.sunrise > :first-child,
-.sunset > :first-child {
+.sunrise> :first-child,
+.sunset> :first-child {
   margin-bottom: 0;
 }
 
-.sunset > :last-child,
-.sunrise > :last-child {
+.sunset> :last-child,
+.sunrise> :last-child {
   margin-top: 0;
 }
 
-.chanceOfRain > :first-child {
+.chanceOfRain> :first-child {
   margin-bottom: 0;
 }
 
-.chanceOfRain > :last-child {
+.chanceOfRain> :last-child {
   margin: 0;
 }
 
@@ -311,11 +311,17 @@ div.wind {
   justify-content: center;
 }
 
-.highLow:first-child {
+.locationDiv {
+  text-align: center;
 }
 
 h3.cityHeader {
-  font-size: 2.7rem;
+  font-size: 2.5rem;
+  margin: 5px 0px;
+}
+
+h3.countryHeader {
+  font-size: 2.5rem;
   margin: 5px 0px;
 }
 
@@ -327,6 +333,13 @@ h4.conditionsHeader {
   display: flex;
   align-items: center;
 }
+
+h4.longerConditions {
+  font-size: calc(1rem + 1vw);
+  text-align: center;
+}
+
+
 
 .conditions {
   display: flex;
@@ -466,7 +479,7 @@ h3.feelsLikeHeader {
     height: auto;
   }
 
-  #forecastContainer > * {
+  #forecastContainer>* {
     /* outline: 1px solid green; */
     flex: 1 auto;
     height: 100%;
@@ -531,7 +544,7 @@ h3.feelsLikeHeader {
     padding: 12px;
   }
 
-  .extraWeatherInfo > .moonPhase svg {
+  .extraWeatherInfo>.moonPhase svg {
     height: 30px;
   }
 

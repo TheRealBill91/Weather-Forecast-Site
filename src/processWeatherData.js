@@ -93,15 +93,44 @@ const processFahrenheitData = (forecastWeatherData, astronomyWeatherData) => {
   }
 }
 
+const formatCountryName = (countryName) => {
+  const formattedCountry =
+    countryName === 'United States of America'
+      ? (countryName = 'United States')
+      : countryName
+
+  return formattedCountry
+}
+
+/* If the conditions header has more than four words, a new css selector needs to be added to make the 
+font smaller, otherwise just return the conditions header text and use the default selector */
+const formatConditionsHeader = (currentConditions) => {
+  const conditionsHeader = document.querySelector('.conditionsHeader')
+  const conditionsText = currentConditions.split(' ')
+  const formattedConditions = currentConditions
+
+  if (conditionsText.length >= 4) {
+    conditionsHeader.classList.toggle('longerConditions')
+  } else {
+    conditionsHeader.classList.remove('longerConditions')
+  }
+
+  return formattedConditions
+}
+
 /* Processes the current weather fahrenheit data for the quick view data */
 const handleCurrentQuickFahrenheitData = (weatherData) => {
   const locationName = weatherData.location.name
-  const currentConditions = weatherData.current.condition.text
+  const countryName = formatCountryName(weatherData.location.country)
+  const currentConditions = formatConditionsHeader(
+    weatherData.current.condition.text
+  )
   const conditionIcon = 'https:' + weatherData.current.condition.icon
   const currentTemp = Math.round(weatherData.current.temp_f)
   const feelsLikeF = Math.round(weatherData.current.feelslike_f)
   return {
     locationName,
+    countryName,
     currentConditions,
     conditionIcon,
     currentTemp,

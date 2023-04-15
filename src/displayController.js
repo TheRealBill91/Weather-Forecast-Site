@@ -50,7 +50,9 @@ const changeQuickWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
       weatherInfoKeys[i] === 'currentConditions'
         ? (divs[1].childNodes[1].textContent = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'locationName'
-        ? (divs[0].textContent = weatherInfoValues[i])
+        ? (divs[0].childNodes[1].textContent = `${weatherInfoValues[i]},`)
+        : weatherInfoKeys[i] === 'countryName'
+        ? (divs[0].childNodes[3].textContent = `${weatherInfoValues[i]}`)
         : weatherInfoKeys[i] === 'conditionIcon'
         ? (divs[1].childNodes[3].src = weatherInfoValues[i])
         : weatherInfoKeys[i] === 'currentTemp'
