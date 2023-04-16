@@ -94,10 +94,22 @@ const processFahrenheitData = (forecastWeatherData, astronomyWeatherData) => {
 }
 
 const formatCountryName = (countryName) => {
+  const quickWeatherInfo = document.querySelectorAll('.locationDiv > h3')
+
   const formattedCountry =
     countryName === 'United States of America'
       ? (countryName = 'United States')
       : countryName
+
+  if (countryName.length >= 12 && countryName.length < 14) {
+    quickWeatherInfo.forEach((div) => {
+      div.style.fontSize = '2.2rem'
+    })
+  } else if (countryName.length >= 14) {
+    quickWeatherInfo.forEach((div) => {
+      div.style.fontSize = '2rem'
+    })
+  }
 
   return formattedCountry
 }
