@@ -151,7 +151,10 @@ const changeForecastFahrenheitInfo = (weatherInfoObj, divs) => {
     for (let i = 0; i < forecastDataKeys.length; i++) {
       const newWeatherInfo =
         forecastDataKeys[i] === 'conditionIcon'
-          ? (currentDiv.childNodes[1].src = forecastDataValues[i])
+          ? (currentDiv.childNodes[1].childNodes[3].src = forecastDataValues[i])
+          : forecastDataKeys[i] === 'dayOfWeek'
+          ? (currentDiv.childNodes[1].childNodes[1].textContent =
+              forecastDataValues[i])
           : forecastDataKeys[i] === 'chanceOfRain'
           ? (currentDiv.childNodes[7].childNodes[3].textContent = `${forecastDataValues[i]} %`)
           : forecastDataKeys[i] === 'tempHighF'
@@ -277,7 +280,10 @@ const changeForecastCelsiusInfo = (weatherInfoObj, divs) => {
     for (let i = 0; i < forecastDataKeys.length; i++) {
       const newWeatherInfo =
         forecastDataKeys[i] === 'conditionIcon'
-          ? (currentDiv.childNodes[1].src = forecastDataValues[i])
+          ? (currentDiv.childNodes[1].childNodes[3].src = forecastDataValues[i])
+          : forecastDataKeys[i] === 'dayOfWeek'
+          ? (currentDiv.childNodes[1].childNodes[1].textContent =
+              forecastDataValues[i])
           : forecastDataKeys[i] === 'chanceOfRain'
           ? (currentDiv.childNodes[7].childNodes[3].textContent = `${forecastDataValues[i]} %`)
           : forecastDataKeys[i] === 'tempHighF'
