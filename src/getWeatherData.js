@@ -43,6 +43,7 @@ const fetchAstronomyData = async () => {
 const fetchForecastDataFromSearch = async () => {
   const inputElm = document.getElementById('locationSearch')
   const inputValue = inputElm.value
+  const spanError = document.querySelector('.error')
   try {
     const response = await fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=842b5da522834ef3bb4233651230704&q=${inputValue}&days=4&aqi=yes&alerts=no
@@ -56,7 +57,8 @@ const fetchForecastDataFromSearch = async () => {
     console.log(forecastWeatherData)
     return forecastWeatherData
   } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error)
+    /*  console.error('There has been a problem with your fetch operation:', error) */
+    spanError.textContent = 'Oops, please enter a valid location'
   }
 }
 

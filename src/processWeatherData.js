@@ -107,7 +107,7 @@ const formatCountryName = (countryName) => {
     })
   } else if (countryName.length >= 14) {
     quickWeatherInfo.forEach((div) => {
-      div.style.fontSize = '2rem'
+      div.style.fontSize = '1.9rem'
     })
   }
 
@@ -199,9 +199,11 @@ const processCelsiusData = (forecastWeatherData) => {
 }
 
 const handleCurrentQuickCelsiusData = (weatherData) => {
-  console.log(weatherData)
   const locationName = weatherData.location.name
-  const currentConditions = weatherData.current.condition.text
+  const countryName = formatCountryName(weatherData.location.country)
+  const currentConditions = formatConditionsHeader(
+    weatherData.current.condition.text
+  )
   const conditionIcon = 'https:' + weatherData.current.condition.icon
   const currentTemp = Math.round(weatherData.current.temp_c)
   const feelsLikeC = Math.round(weatherData.current.feelslike_c)
