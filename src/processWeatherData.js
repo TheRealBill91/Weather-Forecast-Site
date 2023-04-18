@@ -165,8 +165,8 @@ const handleCurrentExtraFahrenheitData = (
   const chanceOfRain =
     forecastWeatherData.forecast.forecastday[0].day.daily_chance_of_rain
 
-  const sunrise = astronomyWeatherData.astronomy.astro.sunrise
-  const sunset = astronomyWeatherData.astronomy.astro.sunset
+  const sunrise = astronomyWeatherData.astronomy.astro.sunrise.slice(1)
+  const sunset = astronomyWeatherData.astronomy.astro.sunset.slice(1)
   const moonphase = astronomyWeatherData.astronomy.astro.moon_phase
   return {
     humidity,
