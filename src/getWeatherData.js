@@ -46,7 +46,7 @@ const fetchForecastDataFromSearch = async () => {
   const spanError = document.querySelector('.error')
   try {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=842b5da522834ef3bb4233651230704&q=${inputValue}&days=4&aqi=yes&alerts=no
+      `https://api.weatherapi.com/v1/forecast.json?key=842b5da522834ef3bb4233651230704&q=${inputValue}&days=3&aqi=yes&alerts=no
           `,
       { mode: 'cors' }
     )

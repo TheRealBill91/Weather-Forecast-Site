@@ -590,6 +590,11 @@ h3.feelsLikeHeader {
     padding: 20px;
   }
 
+  .quickWeatherInfo::before {
+    content: "";
+    background-color: grey;
+  }
+
   .extraWeatherInfo {
     display: grid;
     grid: 1fr 1fr 1fr / 1fr 1fr 1fr;
