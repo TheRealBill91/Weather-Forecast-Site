@@ -13,6 +13,8 @@ import {
 await displayQuickWeatherInfoFahrenheit()
 await displayExtraFahrenheitData()
 await displayForecastFahrenheit()
+const fahrenheitBtn = document.getElementById('fahrenheit-btn')
+fahrenheitBtn.classList.toggle('active')
 toggleCelsiusWeatherInfo()
 toggleFahrenheitWeatherInfo()
 fetchWeatherFromSearchListen()

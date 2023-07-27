@@ -1,12 +1,6 @@
 import { format, parseISO } from 'date-fns'
 
-import {
-  fetchForecastData,
-  fetchAstronomyData,
-  fetchForecastDataFromSearch,
-  fet,
-  fetchAstronomyDataFromSearch
-} from './getWeatherData'
+import { fetchForecastData, fetchAstronomyData } from './getWeatherData'
 
 const processedWeatherData = []
 
@@ -44,8 +38,6 @@ const handleWeatherData = async () => {
       astronomyWeatherData
     )
     setProcessedData(fahrenheitData, celsiusData)
-    console.log(Object.values(fahrenheitData.forecastFahrenheit))
-    console.log(processedWeatherData)
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
@@ -68,7 +60,6 @@ const handleDataFromSearch = async (
     clearProcessedData()
     setProcessedData(fahrenheitData, celsiusData)
 
-    console.log(processedWeatherData)
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
@@ -277,9 +268,6 @@ const getCelsiusForecastDayThree = (forecastWeatherData) => {
   return { dayOfWeek, conditionIcon, tempHighF, tempLowF, chanceOfRain }
 }
 
-
-
-
 const handleForecastFahrenheitData = (forecastWeatherData) => {
   const dayOneData = getFahrenheitForecastDayOne(forecastWeatherData)
   const dayTwoData = getFahrenheitForecastDayTwo(forecastWeatherData)
@@ -323,8 +311,6 @@ const getFahrenheitForecastDayThree = (forecastWeatherData) => {
   const chanceOfRain = dayThreeData.daily_chance_of_rain
   return { dayOfWeek, conditionIcon, tempHighF, tempLowF, chanceOfRain }
 }
-
-
 
 export {
   /*  fetchCurrentWeatherData, */

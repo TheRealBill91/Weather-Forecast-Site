@@ -1,14 +1,10 @@
 import {
   handleWeatherData,
-  handleFetchWeatherFromSearch,
-  processWeatherFromSearch,
-  setProcessedData,
   getProcessedData,
   handleDataFromSearch
 } from './processWeatherData.js'
 
 import {
-  fetchCurrentWeatherFromSearch,
   fetchAstronomyDataFromSearch,
   fetchForecastDataFromSearch
 } from './getWeatherData.js'
@@ -34,7 +30,6 @@ const displayQuickWeatherInfoFahrenheit = async () => {
       { weatherInfoValues: Object.values(fahrenheitData) }
     ]
     changeQuickWeatherInfoFahrenheit(weatherInfoObj, quickWeatherInfoDivs)
-    /*  console.log(weatherInfo) */
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
@@ -43,8 +38,7 @@ const displayQuickWeatherInfoFahrenheit = async () => {
 const changeQuickWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
   const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  /*   console.log(weatherInfoKeys)
-  console.log(weatherInfoValues) */
+
   for (let i = 0; i < weatherInfoKeys.length; i++) {
     const newWeatherInfo =
       weatherInfoKeys[i] === 'currentConditions'
@@ -80,7 +74,6 @@ const displayExtraFahrenheitData = async () => {
       { weatherInfoValues: Object.values(fahrenheitData) }
     ]
     changeExtraWeatherInfoFahrenheit(weatherInfoObj, extraWeatherInfoDivs)
-    /*  console.log(weatherInfo) */
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
@@ -89,8 +82,7 @@ const displayExtraFahrenheitData = async () => {
 const changeExtraWeatherInfoFahrenheit = (weatherInfoObj, divs) => {
   const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  /*  console.log(weatherInfoKeys)
-  console.log(weatherInfoValues) */
+
   for (let i = 0; i < weatherInfoKeys.length; i++) {
     const newWeatherInfo =
       weatherInfoKeys[i] === 'humidity'
@@ -132,17 +124,13 @@ const displayForecastFahrenheit = async () => {
       { weatherInfoValues: Object.values(fahrenheitData) }
     ]
     changeForecastFahrenheitInfo(weatherInfoObj, forecastWeatherInfoDivs)
-    console.log(weatherInfoObj)
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
 }
 
 const changeForecastFahrenheitInfo = (weatherInfoObj, divs) => {
-  const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  console.log(weatherInfoKeys)
-  /* console.log(weatherInfoValues[0]) */
   for (let j = 0; j < divs.length; j++) {
     const currentDiv = divs[j]
     const forecastData = weatherInfoValues[j]
@@ -179,7 +167,6 @@ const displayQuickWeatherInfoCelsius = async () => {
       { weatherInfoValues: Object.values(CelsiusData) }
     ]
     changeQuickWeatherInfoCelsius(weatherInfoObj, quickWeatherInfoDivs)
-    /*  console.log(weatherInfo) */
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
@@ -188,8 +175,7 @@ const displayQuickWeatherInfoCelsius = async () => {
 const changeQuickWeatherInfoCelsius = (weatherInfoObj, divs) => {
   const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  /*   console.log(weatherInfoKeys)
-  console.log(weatherInfoValues) */
+
   for (let i = 0; i < weatherInfoKeys.length; i++) {
     const newWeatherInfo =
       weatherInfoKeys[i] === 'currentConditions'
@@ -225,7 +211,6 @@ const displayExtraCelsiusData = async () => {
       { weatherInfoValues: Object.values(celsiusData) }
     ]
     changeExtraWeatherInfoCelsius(weatherInfoObj, extraWeatherInfoDivs)
-    /*  console.log(weatherInfo) */
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
@@ -234,8 +219,7 @@ const displayExtraCelsiusData = async () => {
 const changeExtraWeatherInfoCelsius = (weatherInfoObj, divs) => {
   const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  /*  console.log(weatherInfoKeys)
-  console.log(weatherInfoValues) */
+
   for (let i = 0; i < weatherInfoKeys.length; i++) {
     const newWeatherInfo =
       weatherInfoKeys[i] === 'windKPH'
@@ -261,17 +245,14 @@ const displayForecastCelsius = async () => {
       { weatherInfoValues: Object.values(celsiusData) }
     ]
     changeForecastCelsiusInfo(weatherInfoObj, forecastWeatherInfoDivs)
-    console.log(weatherInfoObj)
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
   }
 }
 
 const changeForecastCelsiusInfo = (weatherInfoObj, divs) => {
-  const weatherInfoKeys = weatherInfoObj[0].weatherInfoKeys
   const weatherInfoValues = weatherInfoObj[1].weatherInfoValues
-  console.log(weatherInfoKeys)
-  /* console.log(weatherInfoValues[0]) */
+
   for (let j = 0; j < divs.length; j++) {
     const currentDiv = divs[j]
     const forecastData = weatherInfoValues[j]

@@ -11,7 +11,6 @@ const fetchForecastData = async () => {
       throw new Error('Failed Fetch')
     }
     const forecastWeatherData = await response.json()
-    console.log(forecastWeatherData)
     return forecastWeatherData
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
@@ -33,7 +32,6 @@ const fetchAstronomyData = async () => {
       throw new Error('Failed Fetch')
     }
     const astronomyWeatherData = await response.json()
-    console.log(astronomyWeatherData)
     return astronomyWeatherData
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
@@ -54,7 +52,6 @@ const fetchForecastDataFromSearch = async () => {
       throw new Error('Failed Fetch')
     }
     const forecastWeatherData = await response.json()
-    console.log(forecastWeatherData)
     return forecastWeatherData
   } catch (error) {
     /*  console.error('There has been a problem with your fetch operation:', error) */
@@ -79,7 +76,6 @@ const fetchAstronomyDataFromSearch = async () => {
       throw new Error('Failed Fetch')
     }
     const astronomyWeatherData = await response.json()
-    console.log(astronomyWeatherData)
     return astronomyWeatherData
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error)
@@ -102,7 +98,6 @@ const fetchCurrentWeatherFromSearch = async (event) => {
       throw new Error('Failed Fetch')
     }
     const weatherData = await response.json()
-    /* console.log(weatherData) */
     return weatherData
   } catch (error) {
     /*  console.error('There has been a problem with your fetch operation:', error) */
