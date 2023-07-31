@@ -14,7 +14,7 @@ This project is based on a tutorial from The Odin Project, which is a free onlin
 
 ### Images
 
-[Cloud icon](https://game-icons.net/)
+[Cloud icon created by Delapouite ](https://game-icons.net/)
 
 ### Assets
 
