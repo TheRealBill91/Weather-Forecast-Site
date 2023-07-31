@@ -16,6 +16,13 @@ body {
   overflow-x: hidden;
 }
 
+.headerTitle {
+  display: block;
+  text-transform: capitalize;
+  font-size: 2.2rem;
+  z-index: 3;
+}
+
 #searchDiv {
   display: flex;
   align-items: center;
@@ -74,6 +81,7 @@ header {
   z-index: 1;
   box-shadow: 0px 2px 4px 0px rgb(80 80 80 / 27%);
   justify-content: center;
+  padding: 12px 0px;
 }
 
 .logoAndTitle {
@@ -91,6 +99,13 @@ header {
 .logoAndTitle>img {
   width: 110px;
   height: auto;
+  opacity: 0;
+  display: none;
+}
+
+.logoAndTitle svg {
+  height: 70px;
+  width: 70px;
 }
 
 main {
@@ -101,6 +116,7 @@ main {
   width: 100vw;
   justify-content: space-evenly;
   flex-direction: column;
+  padding: 12px 0px;
   /* gap: 10%; */
   /* margin-top: 16px; */
   /* height: 100vh; */
@@ -151,7 +167,7 @@ div#weatherContainer {
   height: auto;
   display: grid;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
   margin-bottom: 24px;
   flex-wrap: wrap;
   grid-template-columns: repeat(auto-fit, minmax(267px, auto));
@@ -352,6 +368,7 @@ h4.conditionsHeader {
   height: 100%;
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 h4.longerConditions {
@@ -437,7 +454,7 @@ h3.feelsLikeHeader {
     width: 105vw;
     display: flex;
     align-items: center;
-
+    padding: 0;
     box-shadow: 0px 2px 4px 0px rgb(80 80 80 / 27%);
   }
 
@@ -479,6 +496,7 @@ h3.feelsLikeHeader {
     width: 100vw;
     justify-content: space-evenly;
     flex-direction: column;
+    padding: 6px 0px;
     /* gap: 10%; */
     /* margin-top: 16px; */
     /* height: 100vh; */
@@ -528,7 +546,6 @@ h3.feelsLikeHeader {
     /* flex-wrap: wrap; */
     /* width: 95%; */
     flex-direction: column;
-    margin-bottom: 12px;
   }
 
   .topBar {
@@ -591,7 +608,7 @@ h3.feelsLikeHeader {
   }
 
   .quickWeatherInfo::before {
-    content: "";
+    content: '';
     background-color: grey;
   }
 
@@ -614,10 +631,31 @@ h3.feelsLikeHeader {
 
   .logoAndTitle {
     margin-left: 24px;
+    object-fit: contain;
+    max-height: 110px;
   }
 
   .logoAndTitle p {
     font-size: 2.2rem;
     font-weight: 800;
+  }
+
+  .logoAndTitle>img {
+    opacity: 100;
+    display: block;
+    height: 135px;
+    width: 135px;
+  }
+
+  .logoAndTitle svg {
+    display: none;
+  }
+
+  .conditions {
+    margin: 10px 0px;
+  }
+
+  .headerTitle {
+    display: none;
   }
 }

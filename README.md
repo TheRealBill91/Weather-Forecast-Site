@@ -14,7 +14,7 @@ This project is based on a tutorial from The Odin Project, which is a free onlin
 
 ### Images
 
-Header logo created using [Bing Image Creator](https://www.bing.com/create)
+[Cloud icon](https://game-icons.net/)
 
 ### Assets
 
